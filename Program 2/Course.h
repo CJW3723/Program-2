@@ -13,16 +13,58 @@ class Registration
     string *major;
     string *courses;
 
-    Registration();
+    //Default Constructor
+    Registration()
+    {
+        name = new string("");
+        grade = new int(0); 
+        major = new string(""); 
+        courses = new string(""); 
+    }
 
-    Registration(string, int, string, string);
+    //Parameterized Constructor
+    Registration(string n, int g, string m, string c)
+    {
+        name = new string(n); 
+        grade = new int(g); 
+        major = new string(m); 
+        courses = new string(c); 
+    }
 
-    ~Registration();
+    //Destructor
+    ~Registration()
+    {
+        delete name; 
+        delete grade; 
+        delete major; 
+        delete courses; 
+    }
 
+    // Overloaded 
+    bool operator < (const Registration& other) const
+    {
+        return *name < *(other.name); 
+    }
+
+    bool operator > (const Registration& other) const
+    {
+        return *name > *(other.name); 
+    }
+
+    bool operator == (const Registration& other) const
+    {
+        return *name == *(other.name); 
+    }
+
+    //insertion operator
+    friend ostream& operator<<(ostream& os, const Registration& reg)
+    {
+        os << "Name: " << *(reg.name) << ", Grade: " << *(reg.grade) 
+        << ", Major: " << *(reg.major) << ", Courses: " << *(reg.courses);
+
+        return os;
+    }
     
-
-
-
 };
 
 
