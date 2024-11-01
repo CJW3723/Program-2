@@ -1,0 +1,20 @@
+Mathematics 101
+Physics 102
+Chemistry 103
+Biology 104
+Computer Science 105
+English Literature 106
+History 107
+Philosophy 108
+Art History 109
+Psychology 110
+Sociology 111
+Economics 112
+Political Science 113
+Anthropology 114
+Geography 115
+Environmental Science 116
+Statistics 117
+Calculus 118
+Algebra 119
+Geometry 120

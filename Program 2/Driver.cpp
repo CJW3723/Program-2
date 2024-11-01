@@ -1,116 +1,171 @@
-#include "Course.h"
+
 #include "LinkedList.h"
-
-
+#include "SortClasses.h"
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
+void showMenu() 
+{
+    cout << "\nMenu:\n";
+    cout << "1. Add Course\n";
+    cout << "2. Remove Course\n";
+    cout << "3. Display Selected Courses\n";
+    cout << "4. Exit Program\n";
+    cout << "Please enter your choice (1-4): ";
+}
 
-void showMenu(){
+void loadCoursesFromFile(LinkedList& availableCourses) 
+{
+    string courseName;
 
-        cout << "1. Add Cours\n";
-        cout << "2. Remove Course\n";
-        cout << "3. View Courses\n";
-        cout << "4. Exit\n";
-        cout << "Please enter you choice (1-4): ";
-    }
-
-    void addCourse(LinkedList<Registration>& courseList, const string&name)
+    ifstream file("ClassList.txt");
+    if (!file.is_open()) 
     {
-        string course; 
-        cout << "Enter course name: ";
-        cin.ignore();
-        getline(cin, course);
-
-        courseList.append(Registration(course)); 
-
+        cerr << "Failed to open ClassList.txt\n";
+        return;
     }
 
-    void removeCourse(LinkedList<Registration>& courseList, const string&name)
+    while (getline(file, courseName)) 
     {
-        string course; 
-        cout << "Select a course to remove: "; 
-
-
+        if (!courseName.empty()) 
+        {
+            availableCourses.addCourse(courseName);
+        }
     }
+    file.close();
+}
 
-    void viewCourse(const Registration* reg) 
+void addCourse(LinkedList& availableCourses, LinkedList& studentCourses) 
+{
+    int choice;
+    int index = 1;
+
+    if (availableCourses.isEmpty()) 
     {
-        cout << "Registration Details: " << endl; 
-        cout << "Name: " << *(reg->name) << endl; 
-        cout << "Grade: " << *(reg->grade) << endl; 
-        cout << "Major: " << *(reg->major) << endl; 
-        cout << "Courses: " << *(reg->courses) << endl; 
-
+        cout << "No available courses to select from.\n";
+        return;
     }
+
+    cout << "\nAvailable Courses:\n";
+    availableCourses.displayCourses();
+
+    cout << "Enter the number of the course you want to add: ";
+    cin >> choice;
+
+    Node* temp = availableCourses.getHead();
     
+    while (temp && index < choice) 
+    {
+        temp = temp->next;
+        index++;
+    }
 
+    if (temp) 
+    {
+        studentCourses.addCourse(temp->courseName);
+        cout << "Course \"" << temp->courseName << "\" added successfully.\n";
+    } 
+    else 
+    {
+        cout << "Invalid selection. Please try again.\n";
+    }
+}
 
-int main(){
-    
-    LinkedList<Registration> courseList;
-    int choice, grade; 
-    string name, major, course;
+void removeCourse(LinkedList& studentCourses) 
+{
+    int choice;
+    int index = 1;
 
-    cout << "Enter student name: " ; 
-    getline(cin, name); 
+    if (studentCourses.isEmpty()) 
+    {
+        cout << "No courses available to remove.\n";
+        return;
+    }
 
-    cout << "Enter grade: "; 
-    cin >> grade; 
+    cout << "\nSelected Courses:\n";
+    studentCourses.displayCourses();
 
-    cout << "Enter Major: "; 
-    cin.ignore();
-    getline(cin, major); 
+    cout << "Enter the number of the course you want to remove: ";
+    cin >> choice;
 
-    cout << "Enter courses: "; 
-    getline(cin, course); 
+    Node* temp = studentCourses.getHead();
+    Node* previous = nullptr;
 
-    Registration* reg = new Registration(name, grade, major, course); 
+    while (temp && index < choice) 
+    {
+        previous = temp;
+        temp = temp->next;
+        index++;
+    }
 
+    if (temp) 
+    {
+        string courseName = temp->courseName;
+        if (previous) 
+        {
+            previous->next = temp->next;
+        } 
+        else 
+        {
+            studentCourses.setHead(temp->next); 
+        }
 
-    while(true){
+        delete temp;
+        cout << "Course \"" << courseName << "\" removed successfully.\n";
+    } 
+    else 
+    {
+        cout << "Invalid selection. Please try again.\n";
+    }
+}
+
+void displayCourses(LinkedList& studentCourses) 
+{
+    if (studentCourses.isEmpty()) 
+    {
+        cout << "No courses available to display.\n";
+        return;
+    }
+
+    sortCoursesAlphabetically(studentCourses);
+
+    cout << "\nSelected Courses (Alphabetical Order):\n";
+    studentCourses.displayCourses();
+}
+
+int main() 
+{
+    int choice;
+
+    LinkedList availableCourses;  
+    LinkedList studentCourses;    
+
+    loadCoursesFromFile(availableCourses);
+
+    while (true) 
+    {
         showMenu();
-        
         cin >> choice;
 
-        switch (choice)
+        switch (choice) 
         {
-        case 1: {
-            cout << "Enter a course that you want to add.\n";
-            addCourse(courseList);
-            break;
-        }
-
-        case 2: {
-            cout << "Enter a course that you want to delete.\n"; 
-            removeCourse(courseList); 
-
-            break;
-        }
-
-        case 3:
-        {
-
-            cout << "Here are your current courses you are enrolled in.\n";
-            viewCourse(reg);
-
-            break;
-        }
-
-        case 4: {
-            cout << "Bye!\n";
-            break;
-        }
-            
-        
-        default:
-            cout << "Invalid choice. Please try again.\n";
-            break;
+            case 1:
+                addCourse(availableCourses, studentCourses);
+                break;
+            case 2:
+                removeCourse(studentCourses);
+                break;
+            case 3:
+                displayCourses(studentCourses);
+                break;
+            case 4:
+                cout << "Exiting course selection. Goodbye!\n";
+                return 0;
+            default:
+                cout << "Invalid choice. Please try again.\n";
+                break;
         }
     }
-
-    //memory clean up
-    delete reg; 
-    
-    return 0;
 }

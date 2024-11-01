@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Registration
+class Registration 
 {
     public:
     string *name;
@@ -13,59 +13,56 @@ class Registration
     string *major;
     string *course;
 
-    //Default Constructor
-    Registration()
+    // Default Constructor
+    Registration() 
     {
         name = new string("");
-        grade = new int(0); 
-        major = new string(""); 
-        course = new string(""); 
+        grade = new int(0);
+        major = new string("");
+        course = new string("");
     }
 
-    //Parameterized Constructor
-    Registration(string n = NULL, int g = NULL, string m = NULL, string c = NULL)
+    // Parameterized Constructor
+    Registration(string n = "", int g = 0, string m = "", string c = "") 
     {
-        name = new string(n); 
-        grade = new int(g); 
-        major = new string(m); 
-        course = new string(c); 
+        name = new string(n);
+        grade = new int(g);
+        major = new string(m);
+        course = new string(c);
     }
 
-    //Destructor
-    ~Registration()
+    // Destructor
+    ~Registration() 
     {
-        delete name; 
-        delete grade; 
-        delete major; 
-        delete course;  
+        delete name;
+        delete grade;
+        delete major;
+        delete course;
     }
 
-    // Overloaded 
-    bool operator < (const Registration& other) const
+    // Overloaded operators
+    bool operator<(const Registration& other) const 
     {
-        return *name < *(other.name); 
+        return *name < *(other.name);
     }
 
-    bool operator > (const Registration& other) const
+    bool operator>(const Registration& other) const 
     {
-        return *name > *(other.name); 
+        return *name > *(other.name);
     }
 
-    bool operator == (const Registration& other) const
+    bool operator==(const Registration& other) const 
     {
-        return *name == *(other.name); 
+        return *name == *(other.name);
     }
 
-    //insertion operator
-    friend ostream& operator<<(ostream& os, const Registration& reg)
+    // Insertion operator
+    friend ostream& operator<<(ostream& os, const Registration& reg) 
     {
-        os << "Name: " << *(reg.name) << ", Grade: " << *(reg.grade) 
-        << ", Major: " << *(reg.major) << ", Courses: " << *(reg.course);
-
+        os << "Name: " << *(reg.name) << ", Grade: " << *(reg.grade)
+           << ", Major: " << *(reg.major) << ", Courses: " << *(reg.course);
         return os;
     }
-    
 };
-
 
 #endif

@@ -1,58 +1,99 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
-#include <LinkedList.cpp>
 
-template <typename T>
-class LinkedList{
-    private:
-        struct Node
-        {
-            T data;
-            Node* next;
-            node(const T& data);
-            
-        };
+#include <string>
+#include <iostream>
+using namespace std;
 
-        node* head;
-        node* tail;
-        int size;
+struct Node 
+{
+    string courseName;
+    Node* next;
 
-    public:
-        
-        Node();
-        Node(const T& classData){
-                data = classData;
-                head = nullptr;
-                tail = nullptr;
-                
-            }
-
-    public:
-        
-        Node();
-        Node(const T& classData){
-                data = classData;
-                head = nullptr;
-                tail = nullptr;
-                
-            }
-
-
-        ~linkedList();
-
-        void append(const T& data);
-        T getNodeValue(const T& data);
-        void removeNode(const T& data);
-        void displayList() const;
-        int search(const T& data);
-        bool isEmpty();
-        void insertNode(int, const T& data);
-
-
-        
+    Node(const string& name) : courseName(name), next(nullptr) {}
 };
 
+class LinkedList 
+{  
+    private:
+    Node* head;
 
+    public:
+    LinkedList() : head(nullptr) {}
+
+    ~LinkedList() 
+    {
+        Node* current = head;
+        while (current) 
+        {
+            Node* toDelete = current;
+            current = current->next;
+            delete toDelete;
+        }
+    }
+
+    void addCourse(const string& courseName) 
+    {
+        Node* newNode = new Node(courseName);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    bool removeCourse(const string& courseName) 
+    {
+        Node* current = head;
+        Node* previous = nullptr;
+
+        while (current) {
+            if (current->courseName == courseName) 
+            {
+                if (previous) 
+                {
+                    previous->next = current->next;
+                } 
+                else 
+                {
+                    head = current->next;
+                }
+
+                delete current;
+                return true;
+            }
+
+            previous = current;
+            current = current->next;
+        }
+        return false;
+
+    }
+
+    void displayCourses() const 
+    {
+        Node* temp = head;
+        int index = 1;
+
+        while (temp) 
+        {
+            cout << index++ << ". " << temp->courseName << endl;
+            temp = temp->next;
+        }
+    }
+
+    Node* getHead() const 
+    {
+        return head;
+    }
+
+    void setHead(Node* newHead)
+    {
+        head = newHead; 
+    }
+
+    bool isEmpty() const 
+    {
+        return head == nullptr;
+    }
+};
 
 
 #endif
