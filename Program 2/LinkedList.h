@@ -93,6 +93,21 @@ class LinkedList
     {
         return head == nullptr;
     }
+
+    int getLength() const
+    {
+        
+    }
+
+    int search()
+    {
+
+    }
+
+    void swap()
+    {
+
+    };
 };
 
 

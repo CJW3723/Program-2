@@ -3,6 +3,7 @@
 
 #include "LinkedList.h"  
 
+//selection sort 
 void sortCoursesAlphabetically(LinkedList& list) 
 {
     Node* start = list.getHead();
