@@ -42,14 +42,24 @@ void showMenu(){
 
 
 int main(){
-
+    
     LinkedList<Registration> courseList;
-    int choice;
-    string name; 
+    int choice, grade; 
+    string name, major, course;
 
+    cout << "Enter student name: " ; 
+    getline(cin, name); 
 
-    cout << "What is your name: ";
-     
+    cout << "Enter grade: "; 
+    cin >> grade; 
+
+    cout << "Enter Major: "; 
+    cin.ignore();
+    getline(cin, major); 
+
+    cout << "Enter courses: "; 
+    getline(cin, course); 
+
 
 
     while(true){
