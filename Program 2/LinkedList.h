@@ -17,6 +17,15 @@ class LinkedList{
         node* tail;
         int size;
 
+    public:
+        
+        Node();
+        Node(const T& classData){
+                data = classData;
+                head = nullptr;
+                tail = nullptr;
+                
+            }
 
     public:
         
