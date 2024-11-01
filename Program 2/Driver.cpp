@@ -138,8 +138,8 @@ void displayCourses(LinkedList& studentCourses)
 
 int main() 
 {
-    string name, major; 
-    int choice, grade; 
+    string name, major, grade; 
+    int choice; 
 
     LinkedList availableCourses;  
     LinkedList studentCourses; 
@@ -149,13 +149,13 @@ int main()
     cout << "Student name: ";
     cin.ignore(); 
     getline(cin,name);
-
-    cout << "Student grade: ";
-    cin >> grade; 
-
+    
     cout << "Enter student major: "; 
     cin.ignore(); 
     getline(cin, major); 
+
+    cout << "Student grade: ";
+    getline(cin, grade); 
 
     Registration<string> student(name, grade, major); 
      

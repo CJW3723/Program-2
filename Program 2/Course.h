@@ -10,23 +10,23 @@ class Registration
 {
     public:
     T *name;
-    int *grade;
+    T*grade;
     T *major;
 
     // Default Constructor
     Registration() 
     {
         name = new T("");
-        grade = new int(0);
+        grade = new T("");
         major = new T("");
         
     }
 
     // Parameterized Constructor
-    Registration(string n = "", int g = 0, string m = "") 
+    Registration(string n = "", string g = "", string m = "") 
     {
         name = new T(n);
-        grade = new int(g);
+        grade = new T(g);
         major = new T(m);
     }
 
