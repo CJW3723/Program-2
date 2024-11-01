@@ -15,26 +15,42 @@ void showMenu(){
         cout << "Please enter you choice (1-4): ";
     }
 
-    void addCourse(LinkedList<Registration>& courseList){
-
-        string course, code;
-
+    void addCourse(LinkedList<Registration>& courseList, const string&name)
+    {
+        string course; 
         cout << "Enter course name: ";
         cin.ignore();
         getline(cin, course);
-        courseList.append(Registration(name))
+
+        courseList.append(Registration(course)); 
 
     }
+
+    void removeCourse(LinkedList<Registration>& courseList, const string&name)
+    {
+        string course; 
+        cout << "Select a course to remove: "; 
+
+
+    }
+
+    void viewCourse()
+    {
+        
+    }
+    
+
 
 int main(){
 
     LinkedList<Registration> courseList;
     int choice;
-
+    string name; 
 
 
     cout << "What is your name: ";
-    cin >> name;
+     
+
 
     while(true){
         showMenu();
@@ -50,13 +66,15 @@ int main(){
         }
 
         case 2: {
-
+            cout << "Enter a course that you want to delete.\n"; 
+            removeCourse(courseList); 
 
             break;
         }
 
         case 3: {
-
+            cout << "Here are your current courses you are enrolled in.\n";
+            viewCourse(courseList); 
             break;
         }
 

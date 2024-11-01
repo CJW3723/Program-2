@@ -23,7 +23,7 @@ class Registration
     }
 
     //Parameterized Constructor
-    Registration(string n, int g, string m, string c)
+    Registration(string n = NULL, int g = NULL, string m = NULL, string c = NULL)
     {
         name = new string(n); 
         grade = new int(g); 
