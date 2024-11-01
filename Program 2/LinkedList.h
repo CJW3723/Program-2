@@ -6,14 +6,14 @@ class LinkedList{
         struct Node
         {
             T data;
-            Node* next;
+            struct Node* next;
             node(const T& data);
             
         };
 
-        node* head;
-        node* tail;
-        int size;
+        Node* head;
+        Node* tail;
+        int size; 
 
 
     public:
@@ -30,7 +30,7 @@ class LinkedList{
         ~linkedList();
 
         void append(const T& data);
-        T getNodeValue(const T& data);
+        T getNodeValue(int);
         void removeNode(const T& data);
         void displayList() const;
         int search(const T& data);
