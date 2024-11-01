@@ -34,9 +34,14 @@ void showMenu(){
 
     }
 
-    void viewCourse()
+    void viewCourse(const Registration* reg) 
     {
-        
+        cout << "Registration Details: " << endl; 
+        cout << "Name: " << *(reg->name) << endl; 
+        cout << "Grade: " << *(reg->grade) << endl; 
+        cout << "Major: " << *(reg->major) << endl; 
+        cout << "Courses: " << *(reg->courses) << endl; 
+
     }
     
 
@@ -60,6 +65,7 @@ int main(){
     cout << "Enter courses: "; 
     getline(cin, course); 
 
+    Registration* reg = new Registration(name, grade, major, course); 
 
 
     while(true){
@@ -82,9 +88,12 @@ int main(){
             break;
         }
 
-        case 3: {
+        case 3:
+        {
+
             cout << "Here are your current courses you are enrolled in.\n";
-            viewCourse(courseList); 
+            viewCourse(reg);
+
             break;
         }
 
@@ -100,6 +109,8 @@ int main(){
         }
     }
 
-
+    //memory clean up
+    delete reg; 
+    
     return 0;
 }
