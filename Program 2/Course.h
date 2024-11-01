@@ -11,7 +11,6 @@ class Registration
     string *name;
     int *grade;
     string *major;
-    string *course;
 
     // Default Constructor
     Registration() 
@@ -19,16 +18,15 @@ class Registration
         name = new string("");
         grade = new int(0);
         major = new string("");
-        course = new string("");
+        
     }
 
     // Parameterized Constructor
-    Registration(string n = "", int g = 0, string m = "", string c = "") 
+    Registration(string n = "", int g = 0, string m = "") 
     {
         name = new string(n);
         grade = new int(g);
         major = new string(m);
-        course = new string(c);
     }
 
     // Destructor
@@ -37,7 +35,6 @@ class Registration
         delete name;
         delete grade;
         delete major;
-        delete course;
     }
 
     // Overloaded operators
@@ -60,7 +57,7 @@ class Registration
     friend ostream& operator<<(ostream& os, const Registration& reg) 
     {
         os << "Name: " << *(reg.name) << ", Grade: " << *(reg.grade)
-           << ", Major: " << *(reg.major) << ", Courses: " << *(reg.course);
+           << ", Major: " << *(reg.major); 
         return os;
     }
 };
