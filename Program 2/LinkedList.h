@@ -1,5 +1,6 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
+#include <LinkedList.cpp>
 
 template <typename T>
 class LinkedList{
@@ -42,7 +43,7 @@ class LinkedList{
         
 };
 
-#include <LinkedList.cpp>
+
 
 
 #endif
