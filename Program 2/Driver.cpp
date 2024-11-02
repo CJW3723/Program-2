@@ -147,11 +147,9 @@ int main()
     cout << "Sudent registration details: " << endl; 
 
     cout << "Student name: ";
-    cin.ignore(); 
     getline(cin,name);
     
     cout << "Enter student major: "; 
-    cin.ignore(); 
     getline(cin, major); 
 
     cout << "Student grade: ";
@@ -176,6 +174,7 @@ int main()
                 removeCourse(studentCourses);
                 break;
             case 3:
+                cout << "\nStudent Detail:\n" << student << endl; 
                 displayCourses(studentCourses);
                 break;
             case 4:
