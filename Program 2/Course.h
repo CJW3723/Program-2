@@ -5,28 +5,29 @@
 
 using namespace std;
 
+template <typename T>
 class Registration 
 {
     public:
-    string *name;
-    int *grade;
-    string *major;
+    T *name;
+    T*grade;
+    T *major;
 
     // Default Constructor
     Registration() 
     {
-        name = new string("");
-        grade = new int(0);
-        major = new string("");
+        name = new T("");
+        grade = new T("");
+        major = new T("");
         
     }
 
     // Parameterized Constructor
-    Registration(string n = "", int g = 0, string m = "") 
+    Registration(string n = "", string g = "", string m = "") 
     {
-        name = new string(n);
-        grade = new int(g);
-        major = new string(m);
+        name = new T(n);
+        grade = new T(g);
+        major = new T(m);
     }
 
     // Destructor

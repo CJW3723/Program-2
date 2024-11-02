@@ -1,6 +1,7 @@
 
 #include "LinkedList.h"
 #include "SortClasses.h"
+#include "Course.h"
 #include <iostream>
 #include <fstream>
 
@@ -137,10 +138,25 @@ void displayCourses(LinkedList& studentCourses)
 
 int main() 
 {
-    int choice;
+    string name, major, grade; 
+    int choice; 
 
     LinkedList availableCourses;  
-    LinkedList studentCourses;    
+    LinkedList studentCourses; 
+
+    cout << "Sudent registration details: " << endl; 
+
+    cout << "Student name: ";
+    getline(cin,name);
+    
+    cout << "Enter student major: "; 
+    getline(cin, major); 
+
+    cout << "Student grade: ";
+    getline(cin, grade); 
+
+    Registration<string> student(name, grade, major); 
+     
 
     loadCoursesFromFile(availableCourses);
 
@@ -158,6 +174,7 @@ int main()
                 removeCourse(studentCourses);
                 break;
             case 3:
+                cout << "\nStudent Detail:\n" << student << endl; 
                 displayCourses(studentCourses);
                 break;
             case 4:
