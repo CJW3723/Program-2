@@ -10,16 +10,24 @@ struct Node
     string courseName;
     Node* next;
 
-    Node(const string& name) : courseName(name), next(nullptr) {}
+    Node(const string& name){
+        courseName = name;
+        next = nullptr;
+    }
+
 };
 
 class LinkedList 
 {  
     private:
     Node* head;
+    Node* tail;
 
     public:
-    LinkedList() : head(nullptr) {}
+    LinkedList(){
+        head = NULL;
+        tail = NULL;
+    }
 
     ~LinkedList() 
     {
@@ -96,17 +104,67 @@ class LinkedList
 
     int getLength() const
     {
+        int counter = 0;
+        Node *nodePtr;
+
+        nodePtr = head;
+
+        while(nodePtr != tail){
+            counter++;
+            nodePtr =nodePtr->next;
+            if(nodePtr == tail){
+                counter++;
+            }
+            
+        }
+        return counter;
         
     }
 
-    int search()
+    int search(string courseName)
     {
+        Node *nodePtr;
+        int num;
+
+        nodePtr = head;
+        num = 0;
+
+        while(nodePtr){
+            if(nodePtr->courseName == courseName){
+                return num;
+            }
+
+            num++;
+
+            nodePtr = nodePtr->next;
+        }
 
     }
 
-    void swap()
+    void swap(int position1, int position2)
     {
+        Node *nodePtr1 = NULL;
+        Node *nodePtr2 = NULL;
+        string temp;
 
+        nodePtr1 = head;
+
+        int position;
+        while(nodePtr1 != NULL && position1 != position){
+            nodePtr1 = nodePtr1->next;
+            position++;
+        }
+
+        nodePtr2 = head;
+        position = 0;
+        while(nodePtr2 != NULL && position2 != position){
+            nodePtr2  = nodePtr2->next;
+            position++;
+        }
+
+        temp = nodePtr1->courseName;
+        nodePtr1->courseName = nodePtr2->courseName;
+        nodePtr2->courseName = temp;
     };
 };
 
